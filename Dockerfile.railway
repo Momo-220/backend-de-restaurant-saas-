@@ -8,8 +8,11 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci --only=production
 
-# Copy source code
-COPY . .
+# Copy source code (exclude tests)
+COPY src ./src
+COPY prisma ./prisma
+COPY tsconfig.json ./
+COPY nest-cli.json ./
 
 # Generate Prisma client
 RUN npx prisma generate
