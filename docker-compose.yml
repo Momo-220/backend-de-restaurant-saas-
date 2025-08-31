@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  postgres:
+    image: postgres:15-alpine
+    container_name: restaurant-saas-db
+    environment:
+      POSTGRES_USER: restaurant_user
+      POSTGRES_PASSWORD: restaurant_password
+      POSTGRES_DB: restaurant_saas
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - restaurant-network
+
+  # Redis pour les WebSockets et cache
+  redis:
+    image: redis:7-alpine
+    container_name: restaurant-saas-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - restaurant-network
+
+  # Application NestJS
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: restaurant-saas-backend
+    environment:
+      DATABASE_URL: "postgresql://restaurant_user:restaurant_password@postgres:5432/restaurant_saas?schema=public"
+      REDIS_HOST: "redis"
+      REDIS_PORT: 6379
+      JWT_SECRET: "your-super-secret-jwt-key-for-development"
+      NODE_ENV: "development"
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - restaurant-network
+    volumes:
+      - ./src:/app/src:ro
+      - ./prisma:/app/prisma:ro
+    command: npm run start:dev
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  restaurant-network:
+    driver: bridge
+
+
+
+
+
+
+
+
+
+
+
+
