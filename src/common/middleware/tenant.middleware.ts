@@ -16,6 +16,9 @@ export interface RequestWithTenant extends Request {
     email: string;
     role: string;
   };
+  headers: any;
+  params: any;
+  query: any;
 }
 
 @Injectable()
