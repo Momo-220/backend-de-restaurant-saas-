@@ -27,7 +27,7 @@ import { TenantMiddleware } from './common/middleware/tenant.middleware';
     MenuModule,
     OrdersModule,
     PaymentsModule,
-    FilesModule,
+    // FilesModule, // Temporairement désactivé pour Railway
     WebsocketModule,
     HealthModule,
   ],
