@@ -23,6 +23,9 @@ RUN npx prisma generate
 # Build application
 RUN npm run build
 
+# Set environment variable for Railway
+ENV PORT=3000
+
 # Expose port
 EXPOSE 3000
 

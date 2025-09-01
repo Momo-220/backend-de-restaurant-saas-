@@ -15,9 +15,14 @@ async function bootstrap() {
     forbidNonWhitelisted: true,
   }));
   
-  // CORS
+  // CORS - Permettre Railway et frontend
   app.enableCors({
-    origin: configService.get('CORS_ORIGIN') || 'http://localhost:3001',
+    origin: [
+      'http://localhost:3001',
+      'https://backend-de-restaurant-saas-production.up.railway.app',
+      /\.railway\.app$/,
+      /\.vercel\.app$/
+    ],
     credentials: true,
   });
   
