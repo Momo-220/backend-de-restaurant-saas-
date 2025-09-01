@@ -47,8 +47,15 @@ export class HealthController {
   @Get('live')
   @Public()
   async live() {
-    // Vérification basique pour Kubernetes liveness probe
-    return { status: 'alive' };
+    // Vérification basique pour Railway healthcheck
+    return { status: 'alive', timestamp: Date.now() };
+  }
+
+  @Get('simple')
+  @Public()
+  simple() {
+    // Healthcheck ultra-simple sans async
+    return 'OK';
   }
 }
 
