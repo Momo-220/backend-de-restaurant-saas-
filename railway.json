@@ -5,6 +5,9 @@
     "dockerfilePath": "Dockerfile.railway"
   },
   "deploy": {
-    "restartPolicyType": "NEVER"
+    "restartPolicyType": "ON_FAILURE",
+    "healthcheckPath": "/api/v1/health",
+    "healthcheckTimeout": 300,
+    "startCommand": "npm run db:setup && npm run start:prod"
   }
 }

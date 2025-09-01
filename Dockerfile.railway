@@ -8,12 +8,13 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install dependencies including devDependencies for build
+RUN npm ci
 
 # Copy source code (exclude tests)
 COPY src ./src
 COPY prisma ./prisma
+COPY scripts ./scripts
 COPY tsconfig.json ./
 COPY nest-cli.json ./
 
@@ -23,11 +24,30 @@ RUN npx prisma generate
 # Build application
 RUN npm run build
 
-# Set environment variable for Railway
+# Clean up devDependencies after build
+RUN npm prune --production
+
+# Set environment variables for Railway
 ENV PORT=3000
+ENV NODE_ENV=production
+
+# Create a non-root user
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nestjs -u 1001
+
+# Change ownership of the app directory
+RUN chown -R nestjs:nodejs /app
+USER nestjs
 
 # Expose port
 EXPOSE 3000
 
-# Start command
-CMD ["npm", "run", "start:prod"]
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node dist/src/health-check.js || exit 1
+
+# Make script executable and start
+RUN chmod +x scripts/start-railway.sh
+
+# Start command with better error handling
+CMD ["./scripts/start-railway.sh"]
