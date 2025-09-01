@@ -30,16 +30,12 @@ ENV NODE_ENV=production
 # Expose port
 EXPOSE 3000
 
-# Create startup script
+# Create simple startup script
 RUN echo '#!/bin/sh' > /app/start.sh && \
-    echo 'echo "🚀 Démarrage de l\'application..."' >> /app/start.sh && \
-    echo 'sleep 5' >> /app/start.sh && \
-    echo 'echo "📊 Application des migrations..."' >> /app/start.sh && \
+    echo 'sleep 10' >> /app/start.sh && \
     echo 'npx prisma migrate deploy' >> /app/start.sh && \
-    echo 'echo "🔑 Génération du client Prisma..."' >> /app/start.sh && \
     echo 'npx prisma generate' >> /app/start.sh && \
-    echo 'echo "🎯 Démarrage du serveur..."' >> /app/start.sh && \
-    echo 'exec node dist/main' >> /app/start.sh && \
+    echo 'node dist/main' >> /app/start.sh && \
     chmod +x /app/start.sh
 
 # Start command
