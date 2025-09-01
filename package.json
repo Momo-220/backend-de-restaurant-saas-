@@ -8,10 +8,7 @@
   "scripts": {
     "build": "nest build",
     "start": "nest start",
-    "start:prod": "node dist/main",
-    "db:migrate": "npx prisma migrate deploy",
-    "db:generate": "npx prisma generate",
-    "db:setup": "npx prisma migrate deploy && npx prisma generate",
+    "start:prod": "npx prisma migrate deploy && npx prisma generate && node dist/main",
     "lint": "echo 'Lint skipped for production'",
     "test": "echo 'Tests skipped for production'",
     "test:watch": "echo 'Tests skipped for production'",
