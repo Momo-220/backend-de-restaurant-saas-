@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+dist/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Coverage
+coverage/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build artifacts
+*.tgz
+*.tar.gz
+
+# Documentation (pas nécessaire en production)
+*.md
+!README.md
+
+# AWS files (pas nécessaire pour Railway)
+.aws/
+terraform/
+trust-policy.json
+
+# Test files
+test/
+*.spec.ts
+*.test.ts
+test-*.js
+audit-*.js
+
+# Docker (pas nécessaire pour Railway)
+Dockerfile
+docker-compose*.yml
+.dockerignore
