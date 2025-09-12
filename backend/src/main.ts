@@ -17,14 +17,23 @@ async function bootstrap() {
   
   // CORS - Permettre Railway et frontend
   app.enableCors({
-    origin: [
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'https://backend-de-restaurant-saas-production.up.railway.app',
-      /\.railway\.app$/,
-      /\.vercel\.app$/,
-      /^http:\/\/(127\.0\.0\.1|192\.168\.[0-9]{1,3}\.[0-9]{1,3}|10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{2,5})?$/,
-    ],
+    origin: (origin, callback) => {
+      // Autoriser requêtes sans origin (file://, outils en local)
+      if (!origin) return callback(null, true);
+
+      const allowedPatterns = [
+        /^http:\/\/localhost:(3000|3001)$/,
+        /^https:\/\/backend-de-restaurant-saas-production\.up\.railway\.app$/, 
+        /\.railway\.app$/,
+        /\.vercel\.app$/,
+        /^https:\/\/nomo-app\.vercel\.app$/,
+        /^http:\/\/(127\.0\.0\.1|192\.168\.[0-9]{1,3}\.[0-9]{1,3}|10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{2,5})?$/,
+      ];
+
+      const isAllowed = allowedPatterns.some((re) => re.test(origin));
+      if (isAllowed) return callback(null, true);
+      return callback(new Error(`CORS bloqué pour l'origine: ${origin}`));
+    },
     credentials: true,
   });
   
