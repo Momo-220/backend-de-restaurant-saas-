@@ -45,7 +45,7 @@ export class QrCodeService {
     }
 
     // Générer l'URL du menu public avec paramètres de table
-    const frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
+    const frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'https://nomo-app.vercel.app';
     const menuUrl = `${frontendUrl}/resto/${table.tenant.slug}/menu?table=${table.id}`;
 
     // Options par défaut pour le QR code
@@ -90,7 +90,7 @@ export class QrCodeService {
     }
 
     // Générer l'URL du menu public
-    const frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
+    const frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'https://nomo-app.vercel.app';
     const menuUrl = `${frontendUrl}/resto/${tenant.slug}/menu`;
 
     // Options par défaut pour le QR code

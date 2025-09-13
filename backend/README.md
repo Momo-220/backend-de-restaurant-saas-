@@ -57,7 +57,7 @@ npm run start:dev
 ```
 
 ### URLs importantes
-- **API**: http://localhost:3000/api/v1
+- **API**: https://backend-de-restaurant-saas-production.up.railway.app/api/v1
 - **Base de données**: localhost:5432
 - **Redis**: localhost:6379
 

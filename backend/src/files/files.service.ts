@@ -59,7 +59,7 @@ export class FilesService {
   }
 
   getPublicUrl(relativePath: string): string {
-    const frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3001';
+    const frontendUrl = this.configService.get<string>('FRONTEND_URL') || 'https://nomo-app.vercel.app';
     return `${frontendUrl}${relativePath}`;
   }
 

@@ -31,7 +31,7 @@ export class PaymentsService {
     private waveService: WaveService,
     private configService: ConfigService,
   ) {
-    this.frontendUrl = this.configService.get<string>('FRONTEND_URL', 'http://localhost:3001');
+    this.frontendUrl = this.configService.get<string>('FRONTEND_URL', 'https://nomo-app.vercel.app');
   }
 
   /**
