@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsOptional, MaxLength, MinLength } from 'class-validator';
+import { IsString, IsEmail, IsOptional, MaxLength, MinLength, IsObject } from 'class-validator';
 
 export class CreateTenantDto {
   @IsString()
@@ -25,7 +25,23 @@ export class CreateTenantDto {
 
   @IsOptional()
   @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsString()
+  website?: string;
+
+  @IsOptional()
+  @IsString()
   logo_url?: string;
+
+  @IsOptional()
+  @IsString()
+  banner_url?: string;
+
+  @IsOptional()
+  @IsObject()
+  payment_info?: any;
 }
 
 

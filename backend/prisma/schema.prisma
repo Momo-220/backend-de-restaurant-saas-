@@ -18,7 +18,11 @@ model Tenant {
   email       String   @unique @db.VarChar(255)
   phone       String?  @db.VarChar(20)
   address     String?  @db.Text
+  description String?  @db.Text
+  website     String?  @db.Text
   logo_url    String?  @db.Text
+  banner_url  String?  @db.Text
+  payment_info Json?   // Stockage des informations de paiement (MyNita, Wave, Orange Money)
   is_active   Boolean  @default(true)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt

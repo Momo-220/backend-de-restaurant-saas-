@@ -1,4 +1,4 @@
-import { IsString, IsEmail, IsOptional, MaxLength, MinLength, IsBoolean } from 'class-validator';
+import { IsString, IsEmail, IsOptional, MaxLength, MinLength, IsBoolean, IsObject } from 'class-validator';
 
 export class UpdateTenantDto {
   @IsOptional()
@@ -28,7 +28,23 @@ export class UpdateTenantDto {
 
   @IsOptional()
   @IsString()
+  description?: string;
+
+  @IsOptional()
+  @IsString()
+  website?: string;
+
+  @IsOptional()
+  @IsString()
   logo_url?: string;
+
+  @IsOptional()
+  @IsString()
+  banner_url?: string;
+
+  @IsOptional()
+  @IsObject()
+  payment_info?: any;
 
   @IsOptional()
   @IsBoolean()
